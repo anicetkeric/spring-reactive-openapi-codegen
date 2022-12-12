@@ -9,7 +9,7 @@ info:
     
     Some useful links:
     - [The library repository](https://github.com/anicetkeric/spring-reactive-openapi-codegen)
-    - [The source API definition for the library](https://github.com/anicetkeric/spring-reactive-openapi-codegen/tree/main/src/main/resources/openapi.yaml)
+    - [The source API definition for the library](https://github.com/anicetkeric/spring-reactive-openapi-codegen/blob/main/src/main/resources/openapi/yaml/library-openapi.yaml)
   termsOfService: http://swagger.io/terms/
   contact:
     email: boottechnologies.ci@gmail.com
@@ -44,8 +44,8 @@ paths:
     get:
       tags:
         - Book
-      summary: Get all list restaurant
-      operationId: getAllRestaurant
+      summary: Get all list book
+      operationId: getAllBook
       responses:
         '200':
           description: return successfully
@@ -248,13 +248,61 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SuccessResponse'
-
+    delete:
+      tags:
+        - Book
+      summary: Delete an existing book
+      operationId: deleteBook
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            description: book id
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "405":
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "400":
+          description: Invalid ID supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Contact not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
   /author:
     get:
       tags:
         - Author
       summary: get all the authors.
-      operationId: getAllBook
+      operationId: getAllAuthor
       responses:
         '200':
           description: return successfully
